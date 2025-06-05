@@ -1,0 +1,8 @@
+{
+  "routes": [
+    "/dictionary",
+    "/home",
+    "/login",
+    "/practice"
+  ]
+}
