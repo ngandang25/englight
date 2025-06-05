@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="translate-form" (ngSubmit)="translate()">
+  <div class="input-group">
+    <input
+      type="text"
+      formControlName="input"
+      placeholder="Nhập từ cần dịch..."
+      class="search-input"
+    />
+    <select formControlName="direction" class="direction-select">
+      <option value="en-vi">Anh → Việt</option>
+      <option value="vi-en">Việt → Anh</option>
+    </select>
+    <button class="search-button" type="submit" [disabled]="loading">
+      {{ loading ? "Đang dịch..." : "Dịch" }}
+    </button>
+  </div>
+</form>
+<div class="search-result" *ngIf="result">
+  <h3>Kết quả:</h3>
+  <div>{{ result }}</div>
+</div>

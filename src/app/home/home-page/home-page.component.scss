@@ -1,0 +1,46 @@
+.daily-vocab {
+	margin: 2rem 0;
+}
+
+.daily-vocab ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	list-style: none;
+	padding: 0;
+}
+
+.daily-vocab li {
+	background: #daf1f2;
+	color: #05949d;
+	font-size: 18px;
+	padding: 0.5rem 1.2rem;
+	border-radius: 20px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background 0.2s, color 0.2s;
+	border: 2px solid transparent;
+}
+
+.daily-vocab li.selected,
+.daily-vocab li:hover {
+	background: #5acac8;
+	color: #fff;
+	border: 2px solid #09aaac;
+}
+
+.vocab-detail {
+	margin-top: 2rem;
+	padding: 1.5rem;
+	border-radius: 12px;
+	border: 1px solid #afe7e6;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1.1rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.error {
+	color: #d32f2f;
+	margin-top: 1rem;
+}

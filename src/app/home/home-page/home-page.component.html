@@ -1,0 +1,42 @@
+<div class="section">
+  <div class="daily-vocab">
+    <h2>10 từ vựng tiếng Anh hôm nay</h2>
+    <ul>
+      <li
+        *ngFor="let word of dailyWords"
+        (click)="selectWord(word)"
+        [class.selected]="word === selectedWord"
+      >
+        {{ word }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="selectedWord" class="vocab-detail">
+    <h3>{{ selectedWord }}</h3>
+    <div *ngIf="loading">Đang tải...</div>
+    <div *ngIf="!loading && wordDetail">
+      <p><b>Nghĩa:</b> {{ wordDetail.meaning }}</p>
+      <div *ngIf="wordDetail.examples?.length">
+        <b>Câu ví dụ:</b>
+        <ul>
+          <li *ngFor="let ex of wordDetail.examples">
+            <p>{{ ex.english }}</p>
+            <p></p>
+            <p class="example-translation">{{ ex.vietnamese }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="!loading && error" class="error">{{ error }}</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="daily-quote">
+    <h2>Câu nói hay hôm nay</h2>
+    <p>{{ dailyQuote }}</p>
+  </div>
+  <div class="quote-author">
+    <p>- {{ quoteAuthor }}</p>
+  </div>
+</div>

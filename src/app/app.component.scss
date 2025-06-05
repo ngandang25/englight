@@ -1,0 +1,14 @@
+
+.layout {
+    display: flex;
+    flex-direction: row;
+}
+.main-content {
+  flex: 1;
+  margin: 20px;
+  transition: margin-left 0.3s;
+  padding: 2rem 1rem 1rem 1rem;
+  border-radius: 8px;
+  background-color: white;
+}
+

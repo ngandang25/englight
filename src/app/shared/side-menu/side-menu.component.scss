@@ -1,0 +1,47 @@
+
+.side-menu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 100;
+}
+.logo  {
+	text-align: center;
+	color: #09b075;
+	margin-left: 26px;
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-menu li {
+  width: 100%;
+}
+.side-menu a {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+	color: #0389b5;
+  border-left: 4px solid transparent;
+	border-radius: 12px;
+  transition: background 0.2s, border-color 0.2s;
+	span {
+		margin-right: 15px;
+	}
+}
+.side-menu a.active, .side-menu a:hover {
+  background-color: #addee4;
+	color: #fff;
+}
+@media (max-width: 700px) {
+  .side-menu {
+    width: 60vw;
+    min-width: 120px;
+    max-width: 220px;
+    padding-top: 60px;
+  }
+}
