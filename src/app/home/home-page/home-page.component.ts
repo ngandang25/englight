@@ -40,8 +40,8 @@ export class HomePageComponent {
   constructor(private geminiService: GeminiService) {
   }
   ngOnInit(): void {
-    this.getWords();
-    this.getQuotation();
+    // this.getWords();
+    // this.getQuotation();
   }
 
   searchVocab() {

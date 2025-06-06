@@ -28,7 +28,7 @@ export class PracticeComponent implements OnInit {
   constructor(private geminiService: GeminiService) { }
 
   ngOnInit(): void {
-    this.loadQuestions();
+    // this.loadQuestions();
   }
 
   loadQuestions() {
