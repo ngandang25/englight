@@ -1,21 +1,73 @@
-<form [formGroup]="form" class="translate-form" (ngSubmit)="translate()">
-  <div class="input-group">
-    <input
-      type="text"
-      formControlName="input"
-      placeholder="Nhập từ cần dịch..."
-      class="search-input"
-    />
-    <select formControlName="direction" class="direction-select">
-      <option value="en-vi">Anh → Việt</option>
-      <option value="vi-en">Việt → Anh</option>
-    </select>
-    <button class="search-button" type="submit" [disabled]="loading">
-      {{ loading ? "Đang dịch..." : "Dịch" }}
-    </button>
+<div class="section">
+  <h2>Khám phá kho tàng từ vựng Anh - Việt / Việt - Anh</h2>
+  <form [formGroup]="form" class="translate-form" (ngSubmit)="translate()">
+    <div class="input-group word-section">
+      <input
+        type="text"
+        formControlName="input"
+        placeholder="Nhập từ cần dịch..."
+        class="search-input"
+      />
+      <select formControlName="direction" class="direction-select">
+        <option value="en-vi">Anh → Việt</option>
+        <option value="vi-en">Việt → Anh</option>
+      </select>
+      <button class="button" type="submit" [disabled]="loading">
+        {{ loading ? "Translating..." : "Translate" }}
+      </button>
+    </div>
+  </form>
+  <div class="search-result" *ngIf="result || resultObj">
+    <h3>Kết quả:</h3>
+    <div *ngIf="resultObj">
+      <p><b>Nghĩa:</b> {{ resultObj.meaning }}</p>
+      <p *ngIf="resultObj.type"><b>Từ loại:</b> {{ resultObj.type }}</p>
+      <p *ngIf="resultObj.pronunciation">
+        <b>Phiên âm:</b> {{ resultObj.pronunciation }}
+      </p>
+      <div *ngIf="resultObj.examples?.length">
+        <b>Câu ví dụ:</b>
+        <ul>
+          <li *ngFor="let ex of resultObj.examples">
+            <p>{{ ex.english }}</p>
+            <p class="example-translation">{{ ex.vietnamese }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="!resultObj">{{ result }}</div>
   </div>
-</form>
-<div class="search-result" *ngIf="result">
-  <h3>Kết quả:</h3>
-  <div>{{ result }}</div>
+</div>
+<div class="section">
+  <h2>Dịch đoạn văn</h2>
+  <form (ngSubmit)="translateParagraph()" class="translate-form">
+    <div class="input-group paragraph-section">
+      <textarea
+        [(ngModel)]="paragraphInput"
+        name="paragraphInput"
+        rows="4"
+        placeholder="Nhập đoạn văn cần dịch..."
+        class="search-input"
+        required
+      ></textarea>
+      <div class="paragraph-controls">
+        <select
+          [(ngModel)]="paragraphDirection"
+          name="paragraphDirection"
+          class="direction-select"
+        >
+          <option value="en-vi">Anh → Việt</option>
+          <option value="vi-en">Việt → Anh</option>
+        </select>
+        <button class="button" type="submit" [disabled]="paragraphLoading">
+          {{ paragraphLoading ? "Translating..." : "Translate" }}
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="search-result" *ngIf="paragraphResult">
+    <h3>Kết quả dịch đoạn văn:</h3>
+    <div>{{ paragraphResult }}</div>
+  </div>
+  <div *ngIf="paragraphError" class="error">{{ paragraphError }}</div>
 </div>

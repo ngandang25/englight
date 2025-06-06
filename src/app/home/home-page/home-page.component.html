@@ -1,6 +1,48 @@
+<div class="section form-section">
+  <p class="intro">
+    <strong
+      >Hãy bắt đầu bằng cách tìm kiếm từ vựng theo cấp độ và chủ đề bạn
+      muốn.</strong
+    >
+  </p>
+  <form (ngSubmit)="searchVocab()" class="vocab-search-form">
+    <label>
+      Level:
+      <select [(ngModel)]="selectedLevel" name="level" required>
+        <option *ngFor="let level of levels" [value]="level.value">
+          {{ level.label }}
+        </option>
+      </select>
+    </label>
+    <label>
+      Subject:
+      <select [(ngModel)]="selectedTopic" name="topic" required>
+        <option *ngFor="let topic of topics" [value]="topic">
+          {{ topic }}
+        </option>
+      </select>
+    </label>
+    <button class="button" type="submit">Search</button>
+  </form>
+  <div *ngIf="searchedWords.length">
+    <h3>10 từ vựng theo lựa chọn</h3>
+    <ul>
+      <li
+        *ngFor="let word of searchedWords"
+        (click)="selectWord(word)"
+        [class.selected]="word === selectedWord"
+      >
+        {{ word }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="searchLoading">Đang tìm kiếm từ vựng...</div>
+  <div *ngIf="searchError" class="error">{{ searchError }}</div>
+</div>
+
 <div class="section">
   <div class="daily-vocab">
-    <h2>10 từ vựng tiếng Anh hôm nay</h2>
+    <h2>Học 10 từ vựng hôm nay</h2>
     <ul>
       <li
         *ngFor="let word of dailyWords"
@@ -11,7 +53,7 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="selectedWord" class="vocab-detail">
+  <div *ngIf="selectedWord" class="details">
     <h3>{{ selectedWord }}</h3>
     <div *ngIf="loading">Đang tải...</div>
     <div *ngIf="!loading && wordDetail">
@@ -33,10 +75,10 @@
 
 <div class="section">
   <div class="daily-quote">
-    <h2>Câu nói hay hôm nay</h2>
-    <p>{{ dailyQuote }}</p>
+    <h2>Đoạn văn hôm nay</h2>
+    <div *ngIf="dailyQuote" class="details">
+      <p>{{ dailyQuote }}</p>
+    </div>
   </div>
-  <div class="quote-author">
-    <p>- {{ quoteAuthor }}</p>
-  </div>
+  <div class="quote-author"></div>
 </div>

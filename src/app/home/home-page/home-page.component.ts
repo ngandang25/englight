@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { GeminiService } from '../../shared/service/gemini.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SharedModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -19,19 +19,38 @@ export class HomePageComponent {
   error: string = '';
 
   dailyQuote: string = '';
-  quoteAuthor: string = '';
+
+  levels = [
+    { value: 'beginner', label: 'Beginner' },
+    { value: 'elementary', label: 'Elementary' },
+    { value: 'pre-intermediate', label: 'Pre-Intermediate' },
+    { value: 'intermediate', label: 'Intermediate' },
+    { value: 'upper-intermediate', label: 'Upper-Intermediate' },
+    { value: 'advanced', label: 'Advanced' }
+  ];
+  topics = [
+    'Family', 'Travel', 'Work', 'Education', 'Health', 'Technology', 'Food', 'Environment', 'Sports', 'Culture'
+  ];
+  selectedLevel = this.levels[0].value;
+  selectedTopic = this.topics[0];
+  searchedWords: string[] = [];
+  searchLoading = false;
+  searchError = '';
 
   constructor(private geminiService: GeminiService) {
   }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getWords();
-    this.getDailyQuote();
+    this.getQuotation();
+  }
+
+  searchVocab() {
+    this.getWords();
+    this.getQuotation();
   }
 
   getWords() {
-    const prompt = 'Hãy cung cấp 10 từ tiếng Anh pre-intermediate level cho hôm nay, mỗi từ trên một dòng. Chỉ trả về danh sách các từ, không giải thích.';
+    const prompt = `Hãy cung cấp 10 từ tiếng Anh ${this.selectedLevel} về chủ đề "${this.selectedTopic}", mỗi từ trên một dòng. Chỉ trả về danh sách các từ, không giải thích.`;
     this.geminiService.generateContent(prompt).subscribe({
       next: (res) => {
         const text = res?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -81,23 +100,23 @@ export class HomePageComponent {
     });
   }
 
-  getDailyQuote() {
-    // Danh sách các câu nói hay mẫu, có thể mở rộng hoặc lấy từ API nếu muốn
-    const quotes = [
-      { text: 'The best way to get started is to quit talking and begin doing.', author: 'Walt Disney' },
-      { text: 'Success is not in what you have, but who you are.', author: 'Bo Bennett' },
-      { text: 'Opportunities don’t happen, you create them.', author: 'Chris Grosser' },
-      { text: 'Don’t let yesterday take up too much of today.', author: 'Will Rogers' },
-      { text: 'It’s not whether you get knocked down, it’s whether you get up.', author: 'Vince Lombardi' },
-      { text: 'If you are working on something exciting, it will keep you motivated.', author: 'Steve Jobs' },
-      { text: 'The harder you work for something, the greater you’ll feel when you achieve it.', author: 'Unknown' },
-      { text: 'Dream bigger. Do bigger.', author: 'Unknown' },
-      { text: 'Don’t watch the clock; do what it does. Keep going.', author: 'Sam Levenson' },
-      { text: 'Great things never come from comfort zones.', author: 'Unknown' }
-    ];
-    // Lấy quote theo ngày (mỗi ngày 1 câu, lặp lại sau 10 ngày)
-    const dayIndex = (new Date().getDate() - 1) % quotes.length;
-    this.dailyQuote = quotes[dayIndex].text;
-    this.quoteAuthor = quotes[dayIndex].author;
+  getQuotation() {
+
+    const prompt = `Hãy cho một đoạn văn từ 7-10 câu tiếng Anh ${this.selectedLevel} về chủ đề "${this.selectedTopic}". `;
+    this.geminiService.generateContent(prompt).subscribe({
+      next: (res) => {
+        try {
+          // Tìm đoạn JSON trong kết quả trả về
+          this.dailyQuote = res?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        } catch (e) {
+          this.error = 'Lỗi xử lý dữ liệu.';
+        }
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Lỗi: ' + (err?.error?.error?.message || err.message || 'Không xác định');
+        this.loading = false;
+      }
+    });
   }
 }

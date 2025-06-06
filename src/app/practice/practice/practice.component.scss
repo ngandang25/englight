@@ -10,9 +10,24 @@
 
 .options label {
     margin-right: 20px;
-    color: rgb(142 144 144);
+    font-style: italic;
     font-size: 16px;
     display: flex;
     flex-direction: row;
-    font-weight: 600;
+
+    input {
+        margin-right: 8px;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 50px;
+    margin-bottom: 16px;
+}
+
+.answer {
+    color: #0b8769;
 }

@@ -1,14 +1,12 @@
-
 .layout {
     display: flex;
     flex-direction: row;
-}
-.main-content {
-  flex: 1;
-  margin: 20px;
-  transition: margin-left 0.3s;
-  padding: 2rem 1rem 1rem 1rem;
-  border-radius: 8px;
-  background-color: white;
+    min-height: 100vh;
+    background-color: #f7f0ff;
 }
 
+.main-content {
+    flex: 1;
+    transition: margin-left 0.3s;
+    padding: 2rem 1rem 1rem 1rem;
+}

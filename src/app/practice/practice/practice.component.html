@@ -1,39 +1,45 @@
-<p>practice works!</p>
-<div class="practice-container">
-  <h2>Bài tập</h2>
-  <button (click)="loadQuestions()" *ngIf="questions.length && !loading">
-    Change questions
-  </button>
-  <div *ngIf="loading">Đang tải bài tập...</div>
-  <form *ngIf="questions.length" (ngSubmit)="submit()">
-    <div *ngFor="let q of questions; let i = index" class="question-block">
-      <div class="question">{{ i + 1 }}. {{ q.question }}</div>
-      <div fxLayout="row" class="options">
-        <label fxLayout="row" *ngFor="let opt of q.options">
-          <input
-            type="radio"
-            [name]="'q' + i"
-            [value]="opt"
-            [(ngModel)]="userAnswers[i]"
-            [disabled]="submitted"
-            required
-          />
-          {{ opt }}
-        </label>
-      </div>
-      <div *ngIf="submitted">
-        <span
-          [class.correct]="userAnswers[i] === q.answer"
-          [class.incorrect]="userAnswers[i] !== q.answer"
-        >
-          Đáp án đúng: {{ q.answer }}
-        </span>
-      </div>
+<div class="section">
+  <div class="practice-container">
+    <div class="header">
+      <h2>Bài tập</h2>
+      <button class="button" (click)="loadQuestions()" *ngIf="!loading">
+        Change to other questions
+      </button>
     </div>
-    <button type="submit" [disabled]="submitted">Submit</button>
-  </form>
-  <div *ngIf="submitted" class="result">
-    <h3>Kết quả: {{ score }}/{{ questions.length }}</h3>
+    <div *ngIf="loading">Đang tải bài tập...</div>
+    <form *ngIf="questions.length" (ngSubmit)="submit()">
+      <div *ngFor="let q of questions; let i = index" class="question-block">
+        <div class="question">{{ i + 1 }}. {{ q.question }}</div>
+        <div fxLayout="row" class="options">
+          <label fxLayout="row" *ngFor="let opt of q.options">
+            <input
+              type="radio"
+              [name]="'q' + i"
+              [value]="opt"
+              [(ngModel)]="userAnswers[i]"
+              [disabled]="submitted"
+              required
+            />
+            {{ opt }}
+          </label>
+        </div>
+        <div *ngIf="submitted">
+          <span
+            [class.correct]="userAnswers[i] === q.answer"
+            [class.incorrect]="userAnswers[i] !== q.answer"
+          >
+            <strong>Đáp án đúng:</strong>
+            <strong class="answer"> {{ q.answer }}</strong>
+          </span>
+        </div>
+      </div>
+      <button class="button" type="submit" [disabled]="submitted">
+        Submit
+      </button>
+    </form>
+    <div *ngIf="submitted" class="result">
+      <h3>Kết quả: {{ score }}/{{ questions.length }}</h3>
+    </div>
+    <div *ngIf="error" class="error">{{ error }}</div>
   </div>
-  <div *ngIf="error" class="error">{{ error }}</div>
 </div>

@@ -1,18 +1,35 @@
-
-h1 {
-    font-weight: 600;
-    color:rgb(4, 65, 134);
-    margin-left: 20px;
-}
-h4 {
+.user {
     margin-right: 20px;
+    display: flex;
+    align-items: center;
+
+    .username {
+        margin-left: 8px;
+        ;
+    }
 }
+
 .header {
-    height: 60px;
-    width: 100%;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
+    height: 80px;
+    border-bottom: 1px solid #d3c1e3;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #fff;
+
+    h1 {
+        font-weight: 700;
+        color: #6219c3;
+        margin-left: 30px;
+        font-family: math;
+        margin: 0 0 4px 30px;
+    }
+
+    h4 {
+        font-weight: 600;
+        color: #0a0114;
+        margin-left: 30px;
+        font-family: math;
+        margin: 0 0 0 30px;
+    }
 }
