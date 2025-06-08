@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GeminiService } from '../../shared/service/gemini.service';
+import { GeminiService } from '../../core/service/gemini.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
@@ -37,7 +37,8 @@ export class HomePageComponent {
   searchLoading = false;
   searchError = '';
 
-  constructor(private geminiService: GeminiService) {
+  constructor(private geminiService: GeminiService
+  ) {
   }
   ngOnInit(): void {
     // this.getWords();

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { GeminiService } from '../../shared/service/gemini.service';
+import { GeminiService } from '../../core/service/gemini.service';
 
 @Component({
   selector: 'app-dictionary',

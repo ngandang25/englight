@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeminiService } from '../../shared/service/gemini.service';
+import { GeminiService } from '../../core/service/gemini.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';

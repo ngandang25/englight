@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     RouterModule.forChild(dictonaryRoutes),
-    HttpClientModule
   ]
 })
 export class DictionaryModule { }

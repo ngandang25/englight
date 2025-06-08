@@ -2,10 +2,22 @@
     margin-right: 20px;
     display: flex;
     align-items: center;
+    position: relative;
 
     .username {
         margin-left: 8px;
         ;
+    }
+
+    .user-account {
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #6219c3;
+        cursor: pointer;
     }
 }
 

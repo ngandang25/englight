@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { GeminiService } from './service/gemini.service';
+import { GeminiService } from '../core/service/gemini.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -20,7 +20,6 @@ import { RouterModule } from '@angular/router';
 		FooterComponent,
 	],
 	providers: [
-		GeminiService
 	]
 })
 export class SharedModule { }
