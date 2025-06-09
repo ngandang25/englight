@@ -6,15 +6,18 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
+    constructor(
+        private authenService: AuthenService,
+        private router: Router
+    ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = inject(AuthenService).getToken();
+        const authToken = this.authenService.getToken();
 
-        if (authToken) {
-            // If we have a token, we set it to the header
-            // req = req.clone({
-            //     setHeaders: { Authorization: `Bearer ${authToken}` }
-            // });
+        if (authToken && req.url.includes('dummyjson.com')) {
+            req = req.clone({
+                setHeaders: { Authorization: `Bearer ${authToken}` }
+            });
         }
 
 
@@ -22,7 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((err) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
-                        inject(Router).navigate(['/login']);
+                        localStorage.removeItem('authToken');
+                        this.router.navigate(['/login']);
                     }
                 }
                 return throwError(err);

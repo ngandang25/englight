@@ -1,0 +1,49 @@
+<div class="section">
+  <h2>Ngữ pháp tiếng anh</h2>
+  <p>
+    Ngữ pháp tiếng anh là một phần quan trọng trong việc học và sử dụng ngôn
+    ngữ. Nó bao gồm các quy tắc về cấu trúc câu, từ vựng, thì, và cách sử dụng
+    các thành phần trong câu.
+  </p>
+  <p>
+    Trong tiếng anh, có nhiều thì khác nhau để diễn tả thời gian và trạng thái
+    của hành động. Mỗi thì có cấu trúc và cách sử dụng riêng biệt.
+  </p>
+</div>
+<div class="section">
+  <form [formGroup]="grammarForm" (ngSubmit)="search()">
+    <mat-radio-group formControlName="isCustomTopic" class="option-group">
+      <mat-radio-button [value]="false">
+        Chọn thì tiếng Anh
+        <select formControlName="tense">
+          <option value="">-- Chọn thì --</option>
+          <option *ngFor="let tense of tenses" [value]="tense">
+            {{ tense }}
+          </option>
+        </select>
+      </mat-radio-button>
+      <mat-radio-button [value]="true">
+        Nhập chủ đề ngữ pháp
+        <input
+          class="custom-topic-input"
+          matInput
+          formControlName="customTopic"
+          placeholder="Ví dụ: Câu điều kiện, Mệnh đề quan hệ..."
+        />
+      </mat-radio-button>
+    </mat-radio-group>
+    <div>
+      <button class="button" type="submit">Search</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="loading()" class="section loading-section">
+  <span class="material-symbols-outlined"> data_usage </span>
+  <span style="margin-left: 12px">Đang tải dữ liệu...</span>
+</div>
+<div *ngIf="error()" class="section error">
+  {{ error() }}
+</div>
+<div *ngIf="details() && !loading() && !error()" class="section">
+  <div [innerHTML]="details()"></div>
+</div>

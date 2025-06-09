@@ -1,0 +1,19 @@
+.option-group {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 16px;
+
+    input,
+    select {
+        width: 300px;
+        margin-left: 20px;
+    }
+}
+
+.loading-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}

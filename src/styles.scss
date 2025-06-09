@@ -34,6 +34,14 @@ select {
     box-shadow: 0 2px 8px rgba(219, 3, 219, 0.06);
 }
 
+input {
+    height: 40px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #929090;
+}
+
 .cdk-overlay-container,
 .cdk-global-overlay-wrapper {
     position: fixed !important;

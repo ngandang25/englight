@@ -31,8 +31,8 @@ export class HomePageComponent {
   topics = [
     'Family', 'Travel', 'Work', 'Education', 'Health', 'Technology', 'Food', 'Environment', 'Sports', 'Culture'
   ];
-  selectedLevel = this.levels[0].value;
-  selectedTopic = this.topics[0];
+  selectedLevel = this.levels[4].value;
+  selectedTopic = this.topics[3];
   searchedWords: string[] = [];
   searchLoading = false;
   searchError = '';

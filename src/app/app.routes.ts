@@ -19,5 +19,9 @@ export const routes: Routes = [
 		path: 'practice',
 		loadChildren: () => import('./practice/practice.module').then(m => m.PracticeModule)
 	},
+	{
+		path: 'grammar',
+		loadChildren: () => import('./grammar/grammar.module').then(m => m.GrammarModule)
+	},
 	{ path: 'login', component: LoginComponent },
 ];

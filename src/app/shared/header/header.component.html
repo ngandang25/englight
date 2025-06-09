@@ -10,15 +10,13 @@
     </div>
     <mat-menu #userMenu="matMenu">
       <div mat-menu-item>
-        <span class="username">Ngan</span>
-        <span class="username">Dang</span>
-      </div>
-      <div mat-menu-item>
         <span class="username">{{ "ngandang.526@gmail.com" }}</span>
       </div>
       <button mat-menu-item (click)="logout()">
-        <span class="material-symbols-outlined">logout</span>
-        Đăng xuất
+        <p class="logout-button">
+          <span class="icon material-symbols-outlined">logout</span>
+          <span>Đăng xuất</span>
+        </p>
       </button>
     </mat-menu>
   </div>
